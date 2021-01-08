@@ -31,8 +31,8 @@ export default function App() {
   return (
     <Canvas camera={{fov:60}}   >
       <ambientLight intensity={0} />
-      <spotLight position={[10, 10, 1]} angle={0.15} penumbra={1} intensity={100} />
-      <pointLight position={[0,0,-0.5]} intensity={80} />
+      <spotLight position={[10, 10, 1]} angle={0.15} penumbra={1} intensity={1} />
+      <pointLight position={[0,0,-0.5]} intensity={1} />
      
       <Shirt position={[-1.4,0.75,-1]}  />
       <Shirt position={[1.4,0.75,-1]}  />

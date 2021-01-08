@@ -13,6 +13,7 @@ function Loading() {
         attach="material"
         color="white"
         transparent
+        
         opacity={0.6}
         roughness={1}
         metalness={0}
@@ -24,14 +25,15 @@ function Loading() {
 function ArWing(props) {
   const group = useRef();
   const gltf = useGLTF("models/shirt1.glb");
-  const tex = useTexture("models/window2.png");
+  const tex = useTexture("models/warpedA.png");
   tex.magFilter = 1;
   tex.minFilter = 1;
-  tex.wrapS = THREE.RepeatWrapping;
-  tex.wrapT = THREE.RepeatWrapping;
-  tex.repeat.set(1,1);
-  
-  
+  tex.wrapS = THREE.ClampToEdgeWrapping;
+  tex.wrapT = THREE.ClampToEdgeWrapping;
+  tex.center.set(0.5,0.5);
+  tex.repeat.set(4,4);
+  tex.offset.set(0.8,-0.7);
+  tex.flipY = false;
   
   const [hovered, setHover] = useState(false);
   const props2 = useSpring({
@@ -45,7 +47,7 @@ function ArWing(props) {
     //inc += 0.01;
     //group.current.rotation.x = group.current.rotation.y  = !hovered? group.current.rotation.y = (group.current.rotation.y + 0.01) % 6.28 : group.current.rotation.y = group.current.rotation.y * 1.01;
     group.current.rotation.z += 0.008;
-   
+    //tex.rotation += 0.01;
     if(!hovered){
 
     
@@ -55,7 +57,7 @@ function ArWing(props) {
   }
 
   
-  //console.log(gltf);
+  //console.log(toggle);
   });
   //return <primitive object={gltf} dispose={null} />  geometry={gltf.nodes.Cube.geometry}  geometry={gltf.nodes.Shirt_on_Hanger_1.geometry}
   return (
@@ -65,12 +67,14 @@ function ArWing(props) {
         onPointerOut={(e) => setHover(false)}   >
         <meshStandardMaterial
           attach="material"
-          color="black" 
+          color="white" 
           emissive="white"
-          roughness={0.35}
-          metalness={0.9}
-          
-          emissiveIntensity={0}
+          roughness={0.95}
+          metalness={0.1}
+          map={tex}
+          emissiveMap={tex}
+        emissiveIntensity={0}
+         
           //transparent//"#00CED3"//"blue"
           opacity={1}
           
