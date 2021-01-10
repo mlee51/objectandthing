@@ -29,17 +29,30 @@ function Box(props) {
 
 export default function App() {
   return (
+    <>
     <Canvas camera={{fov:60}}   >
       <ambientLight intensity={0} />
-      <spotLight position={[10, 10, 1]} angle={0.15} penumbra={1} intensity={1} />
-      <pointLight position={[0,0,-0.5]} intensity={1} />
+      <spotLight position={[10, 10, 1]} angle={0.15} penumbra={1} intensity={10} />
+      <pointLight position={[0,0,-0.5]} intensity={70} />
      
       <Shirt position={[-1.4,0.75,-1]}  />
       <Shirt position={[1.4,0.75,-1]}  />
-      {/*<Box position={[1.5,0,0]} />*/}
+      
       <Model  position={[-1.1,0,-0.5]} />
       <Model  position={[1.1,0,-0.5]} />
       
     </Canvas>
+    <Canvas camera={{fov:60}}   >
+    <ambientLight intensity={0} />
+      <spotLight position={[10, 10, 1]} angle={0.15} penumbra={1} intensity={10} />
+      <pointLight position={[0,0,-0.5]} intensity={70} />
+     
+      <Shirt position={[-1.4,0.75,-1]}  />
+      <Shirt position={[1.4,0.75,-1]}  />
+      
+      <Model  position={[-1.1,0,-0.5]} />
+      <Model  position={[1.1,0,-0.5]} />
+    </Canvas>
+    </>
   )
 }

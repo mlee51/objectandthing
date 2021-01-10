@@ -25,9 +25,10 @@ function Loading() {
 function ArWing(props) {
   const group = useRef();
   const gltf = useGLTF("models/shirt1.glb");
-  const tex = useTexture("models/warpedA.png");
-  tex.magFilter = 1;
-  tex.minFilter = 1;
+  const tex = useTexture(props.imgurl);
+  const inc = props.inc;
+  tex.magFilter = 0;
+  tex.minFilter = 0;
   tex.wrapS = THREE.ClampToEdgeWrapping;
   tex.wrapT = THREE.ClampToEdgeWrapping;
   tex.center.set(0.5,0.5);
@@ -46,7 +47,7 @@ function ArWing(props) {
   useFrame(() => {
     //inc += 0.01;
     //group.current.rotation.x = group.current.rotation.y  = !hovered? group.current.rotation.y = (group.current.rotation.y + 0.01) % 6.28 : group.current.rotation.y = group.current.rotation.y * 1.01;
-    group.current.rotation.z += 0.008;
+    group.current.rotation.z += inc;
     //tex.rotation += 0.01;
     if(!hovered){
 
@@ -69,8 +70,8 @@ function ArWing(props) {
           attach="material"
           color="white" 
           emissive="white"
-          roughness={0.95}
-          metalness={0.1}
+          roughness={0.55}
+          metalness={0}
           map={tex}
           emissiveMap={tex}
         emissiveIntensity={0}
@@ -95,7 +96,7 @@ export default function Shirt(props) {
   return (
     
       <Suspense fallback={<Loading />}>
-        <ArWing   position={props.position}  />
+        <ArWing   position={props.position} imgurl={props.imgurl} inc={props.inc}/>
       </Suspense>
    
   );
