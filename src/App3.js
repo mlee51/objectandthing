@@ -40,13 +40,13 @@ function Main() {
     
     <Shirt position={[-2,0.75,-10]}  />
   <Shirt position={[2,0.75,-10]}  />*/}
-  <group position={[0,0,-7]}>
+  <group position={[0,0,-6]}>
     <pointLight position={[0, 0, -0.5]} intensity={70} />
 
    
 
-    <Model position={[-1.1, 0, -0.5]} />
-    <Model position={[1.1, 0, -0.5]} />
+    <Model position={[0, 0, -0.5]} />
+    
     </group>
 
   </scene>
@@ -58,10 +58,10 @@ function HeadsUpDisplay() {
   useFrame(({ gl }) => void ((gl.autoClear = false), gl.clearDepth(), gl.render(scene.current, camera)), 100)
   return <scene ref={scene}>
     
-    <group position={[0,0,-7]}>
+    <group position={[0,0,-6]}>
    
-    <pointLight position={[0, 3, 0]} intensity={2} /> 
-    <Shirt position={[1.4, 0.75, -1]} imgurl={"models/kidpix.png"}  inc={0.008}/>
+    <pointLight position={[0, 3, 1]} intensity={2} /> 
+    <Shirt position={[0, 0.75, 0]} imgurl={"models/kidpix.png"}  inc={0.008}/>
     </group>
     </scene>
 }
@@ -72,11 +72,11 @@ function HeadsUpDisplay2() {
   const { camera } = useThree()
   useFrame(({ gl }) => void ((gl.autoClear = false), gl.clearDepth(), gl.render(scene.current, camera)), 100)
   return <scene ref={scene}>
-    <group position={[0,0,-7]}>
+    <group position={[0,0,-6]}>
    
-    <pointLight position={[-2, 4, -0.2]} intensity={0.2} /> 
-    <pointLight position={[0.2, 3, 0]} intensity={0.8} /> 
-    <Shirt position={[-1.4, 0.75, -1]} imgurl={"models/warpedA.png"} inc={-0.008}/>
+    <pointLight position={[-0.6, 4, 0.8]} intensity={0.2} /> 
+    <pointLight position={[1.6, 3, 1]} intensity={0.8} /> 
+    <Shirt position={[0, 0.75, 0]} imgurl={"models/warpedA.png"} inc={-0.008}/>
     
     </group>
     </scene>
@@ -88,7 +88,7 @@ function openInNewTab(url) {
   
 }
 
-function App() {
+function App(props) {
   const camera = useRef()
   const { size, setDefaultCamera } = useThree()
   useEffect(() => void setDefaultCamera(camera.current), [])
@@ -104,9 +104,9 @@ function App() {
         onUpdate={self => self.updateProjectionMatrix()}
       />
       <Main />
-      <HeadsUpDisplay  />
-
-      <HeadsUpDisplay2 />
+      
+      {props.black? <HeadsUpDisplay2 /> : <HeadsUpDisplay />}
+    
 
     </>
   )
@@ -114,6 +114,9 @@ function App() {
 export default function App2() {
   return (
     <>
+    <Canvas style={{height:"100%"}}  gl={{ antialias: true }}>
+      <App  black={true}/>
+    </Canvas>
     <Canvas style={{height:"100%"}}  gl={{ antialias: true }}>
       <App  />
     </Canvas>
