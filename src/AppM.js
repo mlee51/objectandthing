@@ -3,6 +3,8 @@ import { Canvas, useFrame } from 'react-three-fiber'
 import Model from "./Model";
 import ShirtM from "./ShirtM";
 import { useThree } from 'react-three-fiber'
+import styled from 'styled-components'
+import { useSpring, config, animated } from 'react-spring';
 
 
 
@@ -58,6 +60,27 @@ function HeadsUpDisplay2() {
     </scene>
 }
 
+const Sdiv = styled(animated.div)`
+backgound-color: white;
+width:100%;
+height: 100%;
+
+
+`
+
+const Label = styled(animated.div)`
+backgound-color: white;
+color: white;
+width:100%;
+height: 30%;
+position: fixed;
+z-index: 3;
+font-size: 150%;
+padding: 1rem;
+mix-blend-mode: difference;
+
+`
+
 
 
 function App(props) {
@@ -65,6 +88,9 @@ function App(props) {
   const { size, setDefaultCamera } = useThree()
   useEffect(() => void setDefaultCamera(camera.current), [])
   useFrame(() => camera.current.updateMatrixWorld())
+
+
+  
  
  
   return (
@@ -85,16 +111,34 @@ function App(props) {
   )
 }
 export default function App2() {
+  const move = useSpring({
+    opacity: 1, transform: 'translateY(0%)',
+  from: { opacity: 0, transform: 'translateY(-200%)' },
+  config: config.slow
+  
+  
+  })
+
+
   return (
     <>
-    <Canvas style={{height:"100%"}}  gl={{ antialias: true }}>
+    <Label style={move}>
+    Object and Thing  
+    </Label>
+    <Sdiv style={move}>
+     
+    <Canvas   gl={{ antialias: true }}>
       <App  black={true}/>
     </Canvas>
-    <Canvas style={{height:"100%"}}  gl={{ antialias: true }}>
+    <Canvas   gl={{ antialias: true }}>
       <App  />
     </Canvas>
+    <br/>
     
+    </Sdiv>
     </>
+    
+   
   )
 }
 
