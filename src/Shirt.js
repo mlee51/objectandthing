@@ -7,7 +7,7 @@ import * as THREE from "three";
 
 function Loading() {
   return (
-    <mesh visible position={[0, 0, 0]} rotation={[0, 0, 0]}>
+    <mesh visible={false} position={[0, 0, 0]} rotation={[0, 0, 0]}>
       <sphereGeometry attach="geometry" args={[1, 16, 16]} />
       <meshStandardMaterial
         attach="material"
@@ -62,7 +62,7 @@ function ArWing(props) {
   return (
     // Add a ref to the group. This gives us a hook to manipulate the properties of this geometry in the useFrame callback.
     <group  {...props}  ref={group} rotation={[-3.14*0.5,3.14,3.14]} scale={[3,3,3]}>
-      <a.mesh  onClick={() => window.open("https://google.com")}  rotation={[0,0,0]} scale={props2.scale}  visible geometry={gltf.nodes.Shirt_on_Hanger_1.geometry} onPointerOver={(e) => setHover(true)}
+      <a.mesh  onClick={() => window.open(props.url)}  rotation={[0,0,0]} scale={props2.scale}  visible geometry={gltf.nodes.Shirt_on_Hanger_1.geometry} onPointerOver={(e) => setHover(true)}
         onPointerOut={(e) => setHover(false)}   >
         <meshStandardMaterial
           attach="material"
@@ -92,7 +92,7 @@ export default function Shirt(props) {
     
       <Suspense fallback={<Loading />}>
        
-        <ArWing   position={props.position} imgurl={props.imgurl} inc={props.inc}/>
+        <ArWing   position={props.position} imgurl={props.imgurl} inc={props.inc} url={props.url}/>
       
       </Suspense>
    
